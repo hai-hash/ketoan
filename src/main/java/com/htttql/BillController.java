@@ -1,5 +1,6 @@
 package com.htttql;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,11 @@ public class BillController {
 	@Autowired
 	private BillRepository billRepository;
 	
+	@RequestMapping(value = "/showbill",method = RequestMethod.GET)
 	public String getAllBill(Model model) {
-		List<Bill> bills = billRepository.findAll();
+		List<Bill> bills = new ArrayList<Bill>();
+		bills = billRepository.findAll();
+		System.out.print(bills.get(0).getTotalPrice());
 		model.addAttribute("bills",bills);
 		return "Bill/showbill";
 	}
